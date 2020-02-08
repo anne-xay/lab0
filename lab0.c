@@ -12,14 +12,18 @@
 int main(int argc, char** argv)
 {
 
-    char *file = malloc(100*sizeof(char));
-    if (argc >= 2 || strcmp(argv[1],"-")){
-        file = argv[1];
-    }
+    char *file=malloc(100*sizeof(char));
+    if (argc >= 2 ){
+	if(!strcmp(argv[1],"-")){
 
-    else{
-        scanf("%s", file); //string is being stored into file
+	    file = argv[1];
+
     }
+    else{
+
+        fgets(file,100, stdin); //string is being stored into file
+    }
+	printf("%s", file);
 
 
     int fd = open(file, O_RDONLY);
