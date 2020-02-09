@@ -14,23 +14,24 @@ int main(int argc, char** argv)
     char string1[200];
     char *file=malloc(100*sizeof(char));
     if (argc >= 2 ){
-	if(!strcmp(argv[1],"-")){
+	    if(!strcmp(argv[1],"-")){
 
-	    file = argv[1];
+	        file = argv[1];
 
-        int fd = open(file, O_RDONLY);
-        if(fd==-1){
-        printf("FILE NOT FOUND");
-        exit(1);
+            int fd = open(file, O_RDONLY);
+            if(fd==-1){
+                printf("FILE NOT FOUND");
+                exit(1);
+            }
+            char buf[1];
+            int x=1;
+            int i=0;
+            while(x){
+                x = read(fd,buf,1);
+                string1[i] = buf[0];
+            }
+	    close(fd);
         }
-        char buf[1];
-        int x=1;
-        int i=0;
-    while(x){
-         x = read(fd,buf,1);
-        string1[i] = buf[0];
-    }
-	close(fd);
     }
     else{
 
@@ -122,7 +123,7 @@ int main(int argc, char** argv)
     }*/
 return(0);
 
-	}//extra
+	
 
 }
 
