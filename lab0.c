@@ -51,6 +51,7 @@ int main(int argc, char** argv)
     while(x){
         dec=0;
         numofOnes=0;
+        k=7;
         while(k>=0 && x!= 0){
             if(string1[offset]=='\0'){
                 x=0;
