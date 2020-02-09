@@ -51,13 +51,13 @@ int main(int argc, char** argv)
     while(x){
         dec=0;
         numofOnes=0;
-        while(k>=0){
+        while(k>=0 && x!= 0){
             if(string1[offset]=='\0'){
                 x=0;
         
                 for(i=k;i>=0;i--){
                     printf("0");
-		    k--;
+		            k--;
                 }
                 break;
             }else if(string1[offset]==' '|| string1[offset]=='\n'|| string1[offset]=='\t'){
