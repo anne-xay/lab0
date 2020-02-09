@@ -29,6 +29,7 @@ int main(int argc, char** argv)
             while(x){
                 x = read(fd,buf,1);
                 string1[i] = buf[0];
+                i++;
             }
 	    close(fd);
         }
