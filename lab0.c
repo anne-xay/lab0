@@ -24,12 +24,13 @@ int main(int argc, char** argv)
         exit(1);
         }
         char buf[1];
-        int x =1;
+        int x=1;
         int i=0;
     while(x){
          x = read(fd,buf,1);
         string1[i] = buf[0];
     }
+	close(fd);
     }
     else{
 
@@ -43,26 +44,28 @@ int main(int argc, char** argv)
     char* par;
 
     printf("Original ASCII    Decimal  Parity\n-------- -------- -------- --------\n");
-    x =1;
+    int x =1;
+    int k=7;
     int offset =0;
     while(x){
         dec=0;
         numofOnes=0;
-        while(k<8){
+        while(k>=0){
             if(string1[offset]=='\0'){
                 x=0;
         
-                for(i=7;i>=0;i--){
+                for(i=k;i>=0;i--){
                     printf("0");
+		    k--;
                 }
                 break;
             }else if(string1[offset]==' '|| string1[offset]=='\n'|| string1[offset]=='\t'){
                 continue;
                 
             }else{
-                dec += ((int)(buf[0])-48)*pow(2,i);
-                numofOnes += ((int)(buf[0])-48);
-                i--;
+                dec += ((int)(string1[offset])-48)*pow(2,k);
+                numofOnes += ((int)(string1[offset])-48);
+                k--;
             } 
             offset++;
         }
@@ -117,10 +120,9 @@ int main(int argc, char** argv)
     printf("%8c %8d %8s\n", ascii,dec,par);
 
     }*/
-close(fd);
 return(0);
 
-
+	}//extra
 
 }
 
