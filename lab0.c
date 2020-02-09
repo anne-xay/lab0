@@ -64,6 +64,7 @@ int main(int argc, char** argv)
                 continue;
                 
             }else{
+                printf(string1[offset]);
                 dec += ((int)(string1[offset])-48)*pow(2,k);
                 numofOnes += ((int)(string1[offset])-48);
                 k--;
@@ -77,8 +78,8 @@ int main(int argc, char** argv)
         else{
             par = "ODD";
         }
-            ascii = (char)(dec);
-            printf("%8c %8d %8s\n", ascii,dec,par);
+        ascii = (char)(dec);
+        printf("%8c %8d %8s\n", ascii,dec,par);
     }
     /*while(x){
 	    i=7;
