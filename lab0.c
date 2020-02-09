@@ -64,7 +64,7 @@ int main(int argc, char** argv)
                 continue;
                 
             }else{
-                printf(string1[offset]);
+                printf("%c",string1[offset]);
                 dec += ((int)(string1[offset])-48)*pow(2,k);
                 numofOnes += ((int)(string1[offset])-48);
                 k--;
