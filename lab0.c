@@ -52,7 +52,7 @@ int main(int argc, char** argv)
         dec=0;
         numofOnes=0;
         k=7;
-        while(k>=0 && x!= 0){
+        while(k>=0 && x!=0){
             if(string1[offset]=='\0'){
                 x=0;
         
@@ -62,7 +62,11 @@ int main(int argc, char** argv)
                 }
                 break;
             }else if(string1[offset]==' '|| string1[offset]=='\n'|| string1[offset]=='\t'){
+                if(string1[offset]=='\0'){
+                    break;
+                }
                 continue;
+
                 
             }else{
                 printf("%c",string1[offset]);
