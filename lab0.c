@@ -44,7 +44,7 @@ int Decimal(char* bin){
 
         dec+=((int)(bin[i])-48)*pow(2,7-i);
 
-        printf("%d", dec);
+        printf("%d\n", dec);
         
     }
 
@@ -89,7 +89,7 @@ void PRINT(char* bin){
     dec = Decimal(bin);
     parity =Parity(bin);
     ascii = Ascii(dec);
-    printf("%8s %8s %8d %s/n", bin, ascii, dec, parity);
+    printf("%8s %8s %8d %s\n", bin, ascii, dec, parity);
 }
 
 char** readFile(int fd){
