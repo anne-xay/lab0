@@ -16,7 +16,7 @@ char ascii[34][6] = {"NULL", "SOH", "STX", "ETX",
                     "SI", "DLE", "DC1", "DC2", "DC3", "DC4",
                     "NAK", "SYN", "ETB", "CAN", "EM", "SUB",
                     "ESC", "FS", "GS", "RS", "US", "Space", "DEL"};
-char binary[200][8];
+char binary[200][9];
 int sizeOFbinary = 0;
 
 void BUFFER(){
@@ -33,6 +33,7 @@ void BUFFER(){
             }
 
         }
+        binary[i][8]= '\0';
     }
 
 }
