@@ -153,7 +153,7 @@ int main(int argc, char** argv)
     printf("Original ASCII    Decimal  Parity\n-------- -------- -------- --------\n");
     BUFFER();
     for(i=0;i<sizeOFbinary;i++){
-        
+        printf("%s", binary[i]);
         PRINT(binary[i]);
 
     }
