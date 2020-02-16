@@ -134,7 +134,7 @@ int main(int argc, char** argv)
         readFile();
 
     }
-    
+    printf("Original ASCII    Decimal  Parity\n-------- -------- -------- --------\n");
     for(i=0;i<sizeOFbinary;i++){
         PRINT(binary[i]);
 
