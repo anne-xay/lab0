@@ -62,7 +62,7 @@ char* Ascii(int dec){
         return ascii[33];
     }
     else{
-        char c[1]=(char)(dec);
+        char c[1]={(char)(dec)};
         return c;
     }
 }
