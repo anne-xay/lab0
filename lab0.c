@@ -64,7 +64,7 @@ char* Ascii(int dec){
     }
     else{
         char c[1]={(char)(dec)};
-        return c;
+        return *c;
     }
 }
 
