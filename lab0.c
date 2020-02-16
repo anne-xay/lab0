@@ -114,13 +114,6 @@ char** readFile(int fd){
 	    close(fd);
 }
 
-void COPY(char* sc, char* des){
-    int i;
-    for(i=0;i<sizeof(sc)/sizeof(char); i++){
-        des[i]=sc[i];
-    }
-
-}
 int main(int argc, char** argv)
 {
     int i;
@@ -130,13 +123,13 @@ int main(int argc, char** argv)
     }
      else if (argv[1][0]=='-'){
          for (i=2; i<argc; i++){
-             COPY(argv[i],binary[i-2]);
+            strcpy(binary[i-2], argv[i]);
          }
          sizeOFbinary =argc-2;
     }
     else if (argv[1][0]=='1'||argv[1][0]=='0'){
         for (i=1; i<argc;i++){
-            COPY(argv[i],binary[i-1]);
+            strcpy(binary[i-1], argv[i]);
         }
         sizeOFbinary= argc -1;
     }
