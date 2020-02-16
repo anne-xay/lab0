@@ -63,7 +63,7 @@ char* Ascii(int dec, char* c){
         c = ascii[33];
     }
     else{
-        c[0] = (char)(dec)
+        c[0] = (char)(dec);
         c[1] = '\n';
     }
 }
@@ -92,7 +92,7 @@ void PRINT(char* bin){
     char* ascii;
     dec = Decimal(bin);
     parity =Parity(bin);
-    ascii[6] = Ascii(dec);
+    Ascii(dec, ascii);
     printf("%8s %8c %8d %s\n", bin, ascii[0], dec, parity);
 }
 
@@ -109,7 +109,7 @@ void PRINT(char* bin){
          } else if(x==0){
              continue;
          }else{
-         binary[i][j] = buf[0];
+         binary[i][j] = buf;
             j++;
          }
         }
