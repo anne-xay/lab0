@@ -55,16 +55,16 @@ int Decimal(char* bin){
 
 }
 
-char* Ascii(int dec){
+char* Ascii(int dec, char* c){
     if(dec<=32){
-        return ascii[dec];
+        c = ascii[dec];
     } 
     else if(dec==127){
-        return ascii[33];
+        c = ascii[33];
     }
     else{
-        char c[2] = {(char)(dec), '\0'};
-        return c;
+        c[0] = (char)(dec)
+        c[1] = '\n';
     }
 }
 
@@ -92,17 +92,17 @@ void PRINT(char* bin){
     char* ascii;
     dec = Decimal(bin);
     parity =Parity(bin);
-    ascii = Ascii(dec);
+    ascii[6] = Ascii(dec);
     printf("%8s %8c %8d %s\n", bin, ascii[0], dec, parity);
 }
 
-char** readFile(int fd){
-    char buf[1];
+ void readFile(int fd){
+    char buf;
     int x=1;
     int i=0;
     int j=0;
     while(x){
-         x = read(fd,buf,1);
+         x = read(fd,&buf,1);
          if(buf==' '){
             i++;
             sizeOFbinary++;
