@@ -25,8 +25,9 @@ void BUFFER(){
     for(i=0;i<=7;i++){
         for(j=0;j<=7;j++){
             if (binary[i][j]!=1||binary[i][j]!=0){
-                for(j;j<=7;j++){
-                    binary[i][j]='0';
+                int k = j;
+                for(k;k<=7;k++){
+                    binary[i][k]='0';
                 }
             }
 
@@ -37,6 +38,7 @@ void BUFFER(){
 
 int Decimal(char* bin){
     //dec += ((int)(binary[offset])-48)*pow(2,k);
+    int i;
     int dec =0;
     for(i=1;i<=7;i++){
         dec+=((int)(bin[i])-48)*pow(2,7-i);
@@ -51,7 +53,7 @@ char* Ascii(int dec){
     if(dec<=32){
         return ascii[dec];
     } 
-    else if(dec=127){
+    else if(dec==127){
         return ascii[33];
     }
     else{
@@ -62,11 +64,12 @@ char* Ascii(int dec){
 char* Parity(char* bin){
     //numofOnes += ((int)(binary[offset])-48);
     int numOFones =0;
+    int i;
     for(i=0;i<=7;i++){
         numOFones += ((int)(bin[i]-48)*pow(2,7-i));
         
     }
-    if(numOfones%2==0){
+    if(numOFones%2==0){
             return "EVEN";
 
         }
@@ -106,11 +109,12 @@ char** readFile(int fd){
         sizeOFbinary+=1;
 	    close(fd);
 }
+
 int main(int argc, char** argv)
 {
     if (argc<=1){
-        printf(Error: File Not Found.);
-        exit();
+        printf("Error: File Not Found.");
+        exit(1);
     }
      else if (argv[1][0]=='-'){
          for (i=2; i<argc; i++){
@@ -128,10 +132,10 @@ int main(int argc, char** argv)
         file = argv[1];
         int fd = open(file, O_RDONLY);
         if(fd==-1){
-            printf(Error: File Not Found);
+            printf("Error: File Not Found");
             exit(1);
         }
-        readFile();
+        readFile(fd);
 
     }
     printf("Original ASCII    Decimal  Parity\n-------- -------- -------- --------\n");
