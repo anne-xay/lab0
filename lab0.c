@@ -44,7 +44,8 @@ int Decimal(char* bin){
 
         dec+=((int)(bin[i])-48)*pow(2,7-i);
 
-        printf("%d\n", dec);
+        printf("%d %c\n", dec, bin[i]);
+        
         
     }
 
