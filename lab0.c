@@ -89,7 +89,7 @@ char* Parity(char* bin){
 void PRINT(char* bin){
     int dec;
     char* parity;
-    char* ascii;
+    char ascii[6];
     dec = Decimal(bin);
     parity =Parity(bin);
     Ascii(dec, ascii);
