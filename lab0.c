@@ -46,7 +46,7 @@ int Decimal(char* bin){
 
         dec+=((int)(bin[i])-48)*pow(2,7-i);
 
-        printf("%d %c\n", dec, bin[i]);
+        //printf("%d %c\n", dec, bin[i]);
         
         
     }
@@ -73,7 +73,7 @@ char* Parity(char* bin){
     int numOFones =0;
     int i;
     for(i=0;i<=7;i++){
-        numOFones += ((int)(bin[i]-48)*pow(2,7-i));
+        numOFones += ((int)(bin[i]-48);
         
     }
     if(numOFones%2==0){
@@ -102,19 +102,21 @@ void PRINT(char* bin){
     int i=0;
     int j=0;
     while(x){
-         x = read(fd,&buf,1);
-         if(buf==' '){
+        x = read(fd,&buf,1);
+        if(buf==' '){
             i++;
             sizeOFbinary++;
-         } else if(x==0){
-             continue;
-         }else{
-         binary[i][j] = buf;
-            j++;
-         }
         }
-        sizeOFbinary+=1;
-	    close(fd);
+        else if(x==0){
+             continue;
+        }
+        else{
+        binary[i][j] = buf;
+        j++;
+        }
+    }
+    sizeOFbinary+=1;
+    close(fd);
 }
 
 int main(int argc, char** argv)
@@ -149,7 +151,7 @@ int main(int argc, char** argv)
     printf("Original ASCII    Decimal  Parity\n-------- -------- -------- --------\n");
     BUFFER();
     for(i=0;i<sizeOFbinary;i++){
-        printf("%s\n", binary[i]);
+        //printf("%s\n", binary[i]);
         PRINT(binary[i]);
 
     }
