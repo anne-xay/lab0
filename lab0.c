@@ -9,6 +9,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
+
 char ascii[34][6] = {"NULL", "SOH", "STX", "ETX",  
                     "EOT", "ENQ", "ACK", "BEL", "BS", 
                     "TAB", "LF", "VT", "FF", "CR", "SO", 
@@ -136,8 +137,8 @@ int main(int argc, char** argv)
     
     for(i=0;i<sizeOFbinary;i++){
         PRINT(binary[i]);
-    }
 
+    }
     /*char string1[200];
     char *file=malloc(100*sizeof(char));
     if (argc >= 2 ){
