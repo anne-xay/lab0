@@ -93,7 +93,7 @@ void PRINT(char* bin){
     dec = Decimal(bin);
     parity =Parity(bin);
     ascii = Ascii(dec);
-    printf("%8s %8s %8d %s\n", bin, ascii[0], dec, parity);
+    printf("%8s %8c %8d %s\n", bin, ascii[0], dec, parity);
 }
 
 char** readFile(int fd){
