@@ -73,7 +73,7 @@ char* Parity(char* bin){
     int numOFones =0;
     int i;
     for(i=0;i<=7;i++){
-        numOFones += ((int)(bin[i]-48);
+        numOFones += ((int)(bin[i]-48));
         
     }
     if(numOFones%2==0){
