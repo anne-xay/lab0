@@ -26,8 +26,9 @@ void BUFFER(){
         for(j=0;j<=7;j++){
             if (binary[i][j]!='1' && binary[i][j]!='0'){
                 int k = j;
-                for(k;k<=7;k++){
+                while(k<=7){
                     binary[i][k]='0';
+                    k++;
                 }
             }
 
@@ -61,7 +62,8 @@ char* Ascii(int dec){
         return ascii[33];
     }
     else{
-        return (char)(dec);
+        char c[1]=(char)(dec);
+        return c;
     }
 }
 
