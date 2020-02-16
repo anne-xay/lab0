@@ -9,9 +9,136 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
+char ascii[34][6] = {"NULL", "SOH", "STX", "ETX",  
+                    "EOT", "ENQ", "ACK", "BEL", "BS", 
+                    "TAB", "LF", "VT", "FF", "CR", "SO", 
+                    "SI", "DLE", "DC1", "DC2", "DC3", "DC4",
+                    "NAK", "SYN", "ETB", "CAN", "EM", "SUB",
+                    "ESC", "FS", "GS", "RS", "US", "Space", "DEL"};
+char binary[200][8];
+int sizeOFbinary = 0;
+
+void BUFFER(){
+    int i;
+    int j;
+    for(i=0;i<=7;i++){
+        for(j=0;j<=7;j++){
+            if (binary[i][j]!=1||binary[i][j]!=0){
+                for(j;j<=7;j++){
+                    binary[i][j]='0';
+                }
+            }
+
+        }
+    }
+
+}
+
+int Decimal(char* bin){
+    //dec += ((int)(binary[offset])-48)*pow(2,k);
+    int dec =0;
+    for(i=1;i<=7;i++){
+        dec+=((int)(bin[i])-48)*pow(2,7-i);
+        
+    }
+
+    return dec;
+
+}
+
+char* Ascii(int dec){
+    if(dec<=32){
+        return ascii[dec];
+    } 
+    else if(dec=127){
+        return ascii[33];
+    }
+    else{
+        return (char)(dec);
+    }
+}
+
+char* Parity(char* bin){
+    //numofOnes += ((int)(binary[offset])-48);
+    int numOFones =0;
+    for(i=0;i<=7;i++){
+        numOFones += ((int)(bin[i]-48)*pow(2,7-i));
+        
+    }
+    if(numOfones%2==0){
+            return "EVEN";
+
+        }
+        else{
+            return "ODD";
+        }
+
+}
+
+void PRINT(char* bin){
+    int dec;
+    char* parity;
+    char* ascii;
+    dec = Decimal(bin);
+    parity =Parity(bin);
+    ascii = Ascii(dec);
+    printf("%8s %8s %8d %s", bin, ascii, dec, parity);
+}
+
+char** readFile(int fd){
+    char buf[1];
+    int x=1;
+    int i=0;
+    int j=0;
+    while(x){
+         x = read(fd,buf,1);
+         if(buf==' '){
+            i++;
+            sizeOFbinary++;
+         } else if(x==0){
+             continue;
+         }else{
+         binary[i][j] = buf[0];
+            j++;
+         }
+        }
+        sizeOFbinary+=1;
+	    close(fd);
+}
 int main(int argc, char** argv)
 {
-    char string1[200];
+    if (argc<=1){
+        printf(Error: File Not Found.);
+        exit();
+    }
+     else if (argv[1][0]=='-'){
+         for (i=2; i<argc; i++){
+             *binary[i-2] = realloc(argv[i],sizeof(char)*8);
+         }
+         sizeOFbinary =argc-2;
+    }
+    else if (argv[1][0]=='1'||argv[1][0]=='0'){
+        for (i=1; i<argc;i++){
+            *binary[i-1] = realloc(argv[i],sizeof(char)*8);
+        }
+        sizeOFbinary= argc -1;
+    }
+    else{
+        file = argv[1];
+        int fd = open(file, O_RDONLY);
+        if(fd==-1){
+            printf(Error: File Not Found);
+            exit(1);
+        }
+        readFile();
+
+    }
+    
+    for(i=0;i<sizeOFbinary;i++){
+        PRINT(binary[i]);
+    }
+
+    /*char string1[200];
     char *file=malloc(100*sizeof(char));
     if (argc >= 2 ){
 	    if(!strcmp(argv[1],"-")){
