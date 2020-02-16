@@ -24,7 +24,7 @@ void BUFFER(){
     int j;
     for(i=0;i<=7;i++){
         for(j=0;j<=7;j++){
-            if (binary[i][j]!=1||binary[i][j]!=0){
+            if (binary[i][j]!=1 && binary[i][j]!=0){
                 int k = j;
                 for(k;k<=7;k++){
                     binary[i][k]='0';
