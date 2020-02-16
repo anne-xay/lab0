@@ -112,6 +112,7 @@ char** readFile(int fd){
 
 int main(int argc, char** argv)
 {
+    int i;
     if (argc<=1){
         printf("Error: File Not Found.");
         exit(1);
@@ -129,8 +130,8 @@ int main(int argc, char** argv)
         sizeOFbinary= argc -1;
     }
     else{
-        file = argv[1];
-        int fd = open(file, O_RDONLY);
+        
+        int fd = open(argv[1], O_RDONLY);
         if(fd==-1){
             printf("Error: File Not Found");
             exit(1);
@@ -219,7 +220,7 @@ int main(int argc, char** argv)
         ascii = (char)(dec);
         printf("%8c %8d %8s\n", ascii,dec,par);
     }
-    /*while(x){
+    while(x){
 	    i=7;
 	    dec=0;
 	    numofOnes =0;
