@@ -1,4 +1,4 @@
-#include <stdio.c>
+#include <stdio.h>
 #include <time.h>
 #include <unistd.h>
 #include <sys/types.h>
