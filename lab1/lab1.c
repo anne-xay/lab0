@@ -39,7 +39,8 @@ int main(){
         wait_child = (child, &status,__W_CONTINUED);
         printf("PPID: %ld, PID: %ld, CPID: %ld, RETVAL: %d\n", getppid(), getpid(), wait_child ,status);
     }
-
-
+printf("USER: %ld, SYS: %ld\n",   , );
+printf("CUSER: %ld, CSYS: %ld\n",  , );
+printf("STOP: %ld", );
     
 }
