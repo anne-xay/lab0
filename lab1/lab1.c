@@ -4,7 +4,6 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <stdlib.h>
-#include <sys/wait.h>
 
 
 int main(){
@@ -30,14 +29,15 @@ int main(){
     else if(child==0){
         //getppid()- gets process identification for PPID
         //getpid()- gets process identification for PID
-        printf("PPID: %d, PID: %d\n", getppid(),getpid());
+        printf("PPID: %ld, PID: %ld\n", getppid(),getpid());
         exit(EXIT_SUCCESS);
     }
     else{
         //use waitpid()- wait for process to change state
         //OPTIONS:WCONTINUED, WNOHANG, WUNTRACED
         int status;
-       
+        wait_child = (child, &status,__W_CONTINUED);
+        printf("PPID: %ld, PID: %ld, CPID: %ld, RETVAL: %d\n", getppid(), getpid(), wait_child ,status);
     }
 
 
