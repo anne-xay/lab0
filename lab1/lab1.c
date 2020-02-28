@@ -4,6 +4,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <stdlib.h>
+#include <sys/wait.h>
 
 
 int main(){
@@ -12,21 +13,31 @@ int main(){
     time_t STOP;
     pid_t wait_child;
     pid_t child;
-    int status;
 
     //time()- get time in seconds
     time(&START);
+
+    printf("START: %ld\n", START);
     
-    printf("START: %ld/n", START);
-    
+    //fork()- create a child process
     child = fork();
 
-    if (child == 0){
+    if (child<0){
+       printf("FORKING FAILED\n");
+       //exit()- cause normal process termination
+       exit(EXIT_FAILURE);
+    }
+    else if(child==0){
         //getppid()- gets process identification for PPID
-        printf("PPID: %ld,", getppid());
-
         //getpid()- gets process identification for PID
-        printf("PID: %ld/n", getpid());
+        printf("PPID: %d, PID: %d\n", getppid(),getpid());
+        exit(EXIT_SUCCESS);
+    }
+    else{
+        //use waitpid()- wait for process to change state
+        //OPTIONS:WCONTINUED, WNOHANG, WUNTRACED
+        int status;
+       
     }
 
 
