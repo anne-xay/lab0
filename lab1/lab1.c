@@ -13,8 +13,12 @@ int main(){
     pid_t wait_child;
     pid_t child;
 
+    struct tms STime;
+    struct tms ETime;
+
     //time()- get time in seconds
     time(&START);
+    times(&STime);
 
     printf("START: %ld\n", START);
     
@@ -42,5 +46,8 @@ int main(){
 printf("USER: %ld, SYS: %ld\n",   , );
 printf("CUSER: %ld, CSYS: %ld\n",  , );
 printf("STOP: %ld", );
+
+times(&ETime);
+printf("STOP: ")
     
 }
