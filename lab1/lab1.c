@@ -4,6 +4,8 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <stdlib.h>
+#include <sys/times.h>
+
 
 
 int main(){
@@ -13,12 +15,12 @@ int main(){
     pid_t wait_child;
     pid_t child;
 
-    struct tms STime;
-    struct tms ETime;
+    clock_t BUF;
+    //for times()
+    struct tms Process_time;
 
     //time()- get time in seconds
     time(&START);
-    times(&STime);
 
     printf("START: %ld\n", START);
     
@@ -40,14 +42,15 @@ int main(){
         //use waitpid()- wait for process to change state
         //OPTIONS:WCONTINUED, WNOHANG, WUNTRACED
         int status;
-        wait_child = (child, &status,__W_CONTINUED);
+        wait_child = waitpid(child, &status,WUNTRACED);
         printf("PPID: %ld, PID: %ld, CPID: %ld, RETVAL: %d\n", getppid(), getpid(), wait_child ,status);
     }
-printf("USER: %ld, SYS: %ld\n",   , );
-printf("CUSER: %ld, CSYS: %ld\n",  , );
-printf("STOP: %ld", );
+    BUF = times(&Process_time);
+printf("USER: %ld, SYS: %ld\n", Process_time.tms_utime ,Process_time.tms_stime);
+printf("CUSER: %ld, CSYS: %ld\n", Process_time.tms_cutime,Process_time.tms_cstime);
+STOP=time(NULL);
+printf("STOP: %ld", STOP);
+exit(EXIT_SUCCESS);
 
-times(&ETime);
-printf("STOP: ")
     
 }
