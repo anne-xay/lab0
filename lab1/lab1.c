@@ -6,7 +6,24 @@
 #include <stdlib.h>
 #include <sys/times.h>
 
-
+void PRINTPROCESS(int child, int wait_child, int status){
+    if (child<0){
+       printf("FORKING FAILED\n");
+       
+    }
+    else if(child==0){
+        //getppid()- gets process identification for PPID
+        //getpid()- gets process identification for PID
+        printf("PPID: %d, PID: %d\n", getppid(),getpid());
+        
+    }
+    else{
+        //use waitpid()- wait for process to change state
+        //OPTIONS:WCONTINUED, WNOHANG, WUNTRACED
+        printf("PPID: %d, PID: %d, CPID: %d, RETVAL: %d\n", getppid(), getpid(), wait_child ,status);
+    }
+    
+}
 
 int main(){
     
@@ -28,14 +45,16 @@ int main(){
     child = fork();
 
     if (child<0){
-       printf("FORKING FAILED\n");
+       //printf("FORKING FAILED\n");
        //exit()- cause normal process termination
+       PRINTPROCESS(child,0,0);
        exit(EXIT_FAILURE);
     }
     else if(child==0){
         //getppid()- gets process identification for PPID
         //getpid()- gets process identification for PID
-        printf("PPID: %ld, PID: %ld\n", getppid(),getpid());
+        //printf("PPID: %ld, PID: %ld\n", getppid(),getpid());
+        PRINTPROCESS(child,0,0);
         exit(EXIT_SUCCESS);
     }
     else{
@@ -43,7 +62,8 @@ int main(){
         //OPTIONS:WCONTINUED, WNOHANG, WUNTRACED
         int status;
         wait_child = waitpid(child, &status,WUNTRACED);
-        printf("PPID: %ld, PID: %ld, CPID: %ld, RETVAL: %d\n", getppid(), getpid(), wait_child ,status);
+        PRINTPROCESS(child,wait_child,status);
+        //printf("PPID: %ld, PID: %ld, CPID: %ld, RETVAL: %d\n", getppid(), getpid(), wait_child ,status);
     }
     BUF = times(&Process_time);
 printf("USER: %ld, SYS: %ld\n", Process_time.tms_utime ,Process_time.tms_stime);
