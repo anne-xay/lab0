@@ -1,1 +1,1 @@
-
+During these two weeks, I spent my days doing mostly research on ppid(), pid(), waitpid(), exit(), time(), and times(). I also did research on how to use struct because I didn't remember how to use it. Next day, I created a skeleton of when the cpid is equal, less than, or greater than 0. I also learned how to populate the structure and not capture. Thank you. 
