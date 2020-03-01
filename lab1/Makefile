@@ -8,8 +8,8 @@
 # EXECUTABLES is a Make Variable (similar to an environment variable) that lists all the
 # "executables" associated with the lab. 
 EXECUTABLES=time-4-baby-and-me
-SRC=Lab1.c
-OBJ=Lab1.o
+SRC=lab1.c
+OBJ=lab1.o
 
 # The CC and CFLAGS variables are defined to ensure I'm using the native compiler and
 # that the correct command-line options are set
@@ -21,14 +21,15 @@ CFLAGS=-g
 all: $(EXECUTABLES)
 
 
-# On the following lines (which must start with a tab), are the commands I need to type -- 
+# On the following lines (which _must_ start with a tab), are the commands I need to type -- 
 # each time my source file is modified.
 $(EXECUTABLES): $(SRC)
-    $(CC) $(CFLAGS) -c $(SRC)
-    $(CC) $(CFLAGS) -o $@ $(OBJ)
+	$(CC) $(CFLAGS) -c $(SRC)
+	$(CC) $(CFLAGS) -o $@ $(OBJ)
 
 # By convention, I always have a target called
 # "clean" that I used to define all temporary
 # or intermediates.
 clean:
-    rm -f $(EXECUTABLES) $(OBJ) *~
+	rm -f $(EXECUTABLES) $(OBJ) *~
+
