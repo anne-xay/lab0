@@ -15,13 +15,13 @@ int main(int argc, char** argv){
     int pipefd[2]; 
 
      if(argc<=1){
-        printf("Error:Not enough arguements.\n");
+        fprintf(stderr,"Error:Not enough arguements.\n");
         exit(EXIT_FAILURE);
     }
 
     //allocates a pipe
     if (pipe(pipefd) == -1){
-        printf("Error:Pipe Failed\n");
+        fprintf(stderr,"Error:Pipe Failed\n");
         exit(EXIT_FAILURE);
     }
 
@@ -29,15 +29,26 @@ int main(int argc, char** argv){
     child1 = fork();
     child2 = fork();
 
-    //The parent process prints the PID of both children on stderr
+    if(child1<0){
+        fprintf(stderr,"Error:Fork Failed\n");
+        exit(EXIT_FAILURE);   
+    }
+    else if(child1==0 && child2>0){
+        //duplicate file descriptor
+        dup2(pipefd[1],1);
+    }
+    else{
+        if (child2<0){
+            fprintf(stderr,"Error:Fork Failed\n");
+            exit(EXIT_FAILURE);
+        }
+        else if (child2==0 && child1>0){
+            dup2(pipefd[1],1);
+        }
+        else{
+            //print
+             fprintf(stderr,"Parent: child1 pid:%d, child2 ppid:%d \n", child1, child2);
+        }
+    }
 
-
-
-
-
-
-
-
-   
 }
-
