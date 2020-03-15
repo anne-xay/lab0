@@ -9,10 +9,10 @@ void PRINTPROCESS(){
     
 }
 
-int main(int argc, char**argv){
+int main(int argc, char** argv){
 
     if(argc<=1){
-        printf("Error:Not enough arguements.\n");
+        fprintf(stderr,"Error:Not enough arguements.\n");
         exit(EXIT_FAILURE);
     }
 
@@ -20,17 +20,18 @@ int main(int argc, char**argv){
     child = fork();
 
     if (child<0){
-       printf("FORKING FAILED\n");
+       fprintf(stderr,"FORK FAILED\n");
        
        //exit()- cause normal process termination
        exit(EXIT_FAILURE);
     }
     else if(child==0){
-        char *newargv[argc];
+        char *newargv[argc-1];
+        int i;
+        for(i=1; i < argc; i++){
 
-        for(int i=1; argc > i-1; i++){
-
-           argv[i] = newargv[i-1];
+           newargv[i-1] = argv[i];
+           printf("%s\n", newargv[i]);
         
         }
  
