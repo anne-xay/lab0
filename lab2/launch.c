@@ -11,7 +11,6 @@ void C_PROCESS(int argc, char** argv){
         for(i=1; i < argc; i++){
 
            newargv[i-1] = argv[i];
-           printf("%d: %s\n", argc, argv[i]);
         
         }
         newargv[argc-1] = (char*)0;
