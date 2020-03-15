@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <string.h>
 #include <stdlib.h>
 
 void PRINTPROCESS(){
@@ -16,8 +17,7 @@ int main(int argc, char** argv){
         exit(EXIT_FAILURE);
     }
 
-    pid_t child;
-    child = fork();
+    pid_t child = fork();
 
     if (child<0){
        fprintf(stderr,"FORK FAILED\n");
@@ -26,14 +26,15 @@ int main(int argc, char** argv){
        exit(EXIT_FAILURE);
     }
     else if(child==0){
-        char *newargv[argc-1];
+        char *newargv[argc];
         int i;
         for(i=1; i < argc; i++){
 
            newargv[i-1] = argv[i];
-           printf("%s\n", newargv[i]);
+           printf("%d: %s\n", argc, argv[i]);
         
         }
+        newargv[argc-1] = (char*)0;
  
         //execve - execute program
         execve(argv[1], newargv, NULL);
