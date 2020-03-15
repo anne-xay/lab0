@@ -7,7 +7,7 @@
 
 int main(int argc, char** argv){
 
-    pid_t child1; //launches two child processes therefore need to check for status of 2 children
+    pid_t child1; //launches two child processes therefor need to check for status of 2 children
     int status1;
     pid_t child2;
     int status2;
@@ -27,13 +27,14 @@ int main(int argc, char** argv){
     int i;
     for(i = 1; i < argc; i++)
     {
-        if(strcmp(argv[i], ","))
+        if(strcmp(argv[i], ",")==0)
         {
             break;
         }
         newargv1[i-1]=argv[i];
     }
     newargv1[i] = (char*)0;
+
     if(i+1 >= argc)
     {
         fprintf(stderr,"Error:Not enough arguements.\n");
@@ -44,7 +45,7 @@ int main(int argc, char** argv){
     {
         newargv2[j-1]=argv[i+j];
     }
-    newargv1[i] = (char*)0;
+    newargv2[i] = (char*)0;
 
     //allocates a pipe
     if (pipe(pipefd) == -1){
@@ -71,13 +72,14 @@ int main(int argc, char** argv){
             fprintf(stderr, "child 1 %s: $$ = %d\n", newargv1[0], getpid());
 		    fprintf(stderr, "child 2 %s: $$ = %d\n", newargv2[0], getpid());
 
+		    waitpid(child1, &status1, WUNTRACED);
+
             close(pipefd[0]);
 
-		    waitpid(child1, &status1, WUNTRACED);
 		    fprintf(stderr, "child 1 %s: $? = %d\n", newargv1[0], status1);
 
 		    waitpid(child2, &status2, WUNTRACED);
-		    fprintf(stderr, "child 2 %s: $? = %d\n", newargv2[2], status2);
+		    fprintf(stderr, "child 2 %s: $? = %d\n", newargv2[0], status2);
 
 		    close(pipefd[1]);
         }
@@ -86,7 +88,7 @@ int main(int argc, char** argv){
             //in child2
             dup2(pipefd[1],1);
 
-            execve(argv[2], newargv2, NULL);
+            execve(newargv1[0], newargv2, NULL);
         }
     }
     else if(child1<0){
@@ -98,7 +100,7 @@ int main(int argc, char** argv){
         //duplicate file descriptor
         dup2(pipefd[1],1);
 
-        execve(argv[1], newargv1, NULL);
+        execve(newargv2[0], newargv1, NULL);
     }
     return 0;
 }
