@@ -27,11 +27,13 @@ int main(int argc, char** argv){
     int i;
     for(i = 1; i < argc; i++)
     {
+
         if(strcmp(argv[i], ",")==0)
         {
             break;
         }
         newargv1[i-1]=argv[i];
+        printf("%s\n",newargv1[i-1]);
     }
     newargv1[i] = (char*)0;
 
@@ -44,6 +46,7 @@ int main(int argc, char** argv){
     for(j=1; j+i < argc; j++)
     {
         newargv2[j-1]=argv[i+j];
+        printf("%s\n",newargv2[j-1]);
     }
     newargv2[i] = (char*)0;
 
