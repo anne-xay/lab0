@@ -12,7 +12,7 @@ int main(int argc, char** argv){
     pid_t child2;
     int status2;
 
-    char* newargv1[argc];
+    char* newargv1[argc];  
     char* newargv2[argc];
 
     
@@ -69,24 +69,30 @@ int main(int argc, char** argv){
         else if(child2>0)
         {
             //in parent
+
+            close(pipefd[0]);
+            close(pipefd[1]);
+
             fprintf(stderr, "child 1 %s: $$ = %d\n", newargv1[0], getpid());
 		    fprintf(stderr, "child 2 %s: $$ = %d\n", newargv2[0], getpid());
 
 		    waitpid(child1, &status1, WUNTRACED);
 
-            close(pipefd[0]);
+            //close(pipefd[0]);
 
 		    fprintf(stderr, "child 1 %s: $? = %d\n", newargv1[0], status1);
 
 		    waitpid(child2, &status2, WUNTRACED);
 		    fprintf(stderr, "child 2 %s: $? = %d\n", newargv2[0], status2);
 
-		    close(pipefd[1]);
+		    //close(pipefd[1]);
         }
         else
         {
             //in child2
-            dup2(pipefd[1],1);
+            close(pipefd[1]);
+            dup2(pipefd[0],0);
+            close(pipefd[0]);
 
             execve(newargv1[0], newargv2, NULL);
         }
@@ -98,7 +104,9 @@ int main(int argc, char** argv){
     else{
         //in child1
         //duplicate file descriptor
+        close(pipefd[0]);
         dup2(pipefd[1],1);
+        close(pipefd[1]);
 
         execve(newargv2[0], newargv1, NULL);
     }
