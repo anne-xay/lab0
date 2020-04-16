@@ -1,1 +1,1 @@
-
+I started off in the main function dealing with checking for the signals, then I called sig_handler which is where the program registers a handler for each signal.
