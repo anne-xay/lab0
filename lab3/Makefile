@@ -1,8 +1,8 @@
+EXECUTABLES=catcher
 CC=gcc
 CFLAGS=-g
 
-all:
-	$(EXECUTABLES)
+all: $(EXECUTABLES)
 
 catcher:
 	$(CC) $(CFLAGS) -c catcher.c
