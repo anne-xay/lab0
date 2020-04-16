@@ -24,7 +24,7 @@ void sig_handler(int sig){
     //The handler emits a line to stdout that indicates 
     //the signal caught, 
     //and the time it was caught 
-    printf("SIG%s caught at %d\n", sigs[sig-1], time(NULL));
+    printf("SIG%s caught at %ld\n", sigs[sig-1], time(NULL));
 
     //The handler registers itself again
     signal(sig, sig_handler);
@@ -67,7 +67,7 @@ int main(int argc, char** argv){
     {
         pause();
     }
-    while(!(sig_termcount > 3)
+    while(!(sig_termcount > 3));
 
     //The program emits a final status message to stderr that indicates
     //the number of signals caught
