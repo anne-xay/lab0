@@ -44,22 +44,27 @@ int cycles(sem_t chopstick[],int i){
 
     do{
         wait(chopstick[i]);
-        wait(chopstick[(i+1)]);
+        wait(chopstick[(i+1)%5]);
 
         /*eat for  awhile*/
+        eat();
 
         signal(chopstick[i]);
-        signal(chopstick[(i+1)]);
+        signal(chopstick[(i+1)%5]);
 
         /*think for awhile*/
+        think();
+        
+        EatThink_cycles++;
 
     }while(true);
 
-
+    //want to return the number of full eat-think cycles
+    return EatThink_cycles;
 
 }
 
-void remove(){
+void remove(sem_t chopstick[]){
 /*When your program receives this signal, it needs to 
 
     //return success from the process
@@ -67,9 +72,9 @@ void remove(){
 
     /*effectively remove the philosopher from the eat-think cycle
         release any system resources*/
-    sem_close();
+    sem_close(chopstick[5]);
     sem_unlink();
-    sem_destroy();
+    sem_destroy(chopstick[5]);
 
      /*Philosopher #n completed m cycles onto stderr*/
     //fprintf(stderr,"Philosopher #%d completed %d cycles/n, seat, completed )";
@@ -79,6 +84,12 @@ void remove(){
 
 
 int main(int argc, char** argv){
+
+    if(argc <2){
+        fprintf(stderr, "INVALID ARGUEMENTS\n");
+        exit(EXIT_FAILURE);
+    }
+
 
 }
 
