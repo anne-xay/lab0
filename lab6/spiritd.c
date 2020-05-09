@@ -81,7 +81,7 @@ void sig_handler(sig){
 
 int main(int argc, char** argv){
     struct rlimit rLS;
-    int i,
+    int i;
     pid_t ch;
 
 
