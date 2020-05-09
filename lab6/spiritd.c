@@ -84,6 +84,7 @@ int main(int argc, char** argv){
     int i;
     int fd0;
     pid_t ch;
+    pid_t mole_child;
 
 
     ch = fork();
@@ -127,8 +128,10 @@ int main(int argc, char** argv){
         dup2(fd0,1);
         dup2(fd0,2);
 
-        while(true){
-            pause();
+        mole_child = fork();
+
+        while(1){
+           pause();
         }
 
     }
