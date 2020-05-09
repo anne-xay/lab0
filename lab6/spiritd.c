@@ -81,22 +81,23 @@ void sig_handler(sig){
 
 int main(int argc, char** argv){
     struct rlimit rLS;
-    pid_t child;
     int i,
+    pid_t ch;
 
-    child = fork();
 
-    if(child > 0){
+    ch = fork();
+
+    if(ch > 0){
         fprintf(stderr,"FORK FAILED\n");
         exit(EXIT_FAILURE);
 
     }
-    else if(child < 0){
+    else if(ch < 0){
         fprintf(stderr,"FORK FAILED\n");
         exit(EXIT_FAILURE);
 
     }
-    else if(child == 0){
+    else if(ch == 0){
         umask(0);
         signal(SIGTERM, sig_handler);
         signal(SIGUSR1, sig_handler);
