@@ -27,7 +27,7 @@ void dev_mole(){
         CP[1] = rand_mole;
         CP[2] = NULL;
 
-        execve(CP[0], CP);
+        execv(CP[0], CP);
 
     }
 
@@ -80,5 +80,50 @@ void sig_handler(sig){
 }
 
 int main(int argc, char** argv){
+    struct rlimit rLS;
+    pid_t child;
+    int i,
+
+    child = fork();
+
+    if(child > 0){
+        fprintf(stderr,"FORK FAILED\n");
+        exit(EXIT_FAILURE);
+
+    }
+    else if(child < 0){
+        fprintf(stderr,"FORK FAILED\n");
+        exit(EXIT_FAILURE);
+
+    }
+    else if(child == 0){
+        umask(0);
+        signal(SIGTERM, sig_handler);
+        signal(SIGUSR1, sig_handler);
+        signal(SIGUSR2, sig_handler);
+
+        printf("Daemon PID: %d\n", getpid());
+        
+        setsid();
+
+        int path = chdir("/");
+        if(path < 0){
+            fprintf(stderr,"Unable to change directory\n");
+            exit(EXIT_FAILURE);
+        }
+
+        if(rLS.rlim_max == RLIM_INFINITY){
+            rLS.rlim_max = 1024;
+        }
+
+        for(i = 0; i < rLS.rlim_max; i++) {
+            close(i);
+        }
+
+
+
+
+    }
+
     
 }
