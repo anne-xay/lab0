@@ -121,10 +121,17 @@ int main(int argc, char** argv){
             close(i);
         }
 
+        fd0 = open("/dev/null", O_RDONLY);
+        dup2(fd0, 0);
+        dup2(fd0,1);
+        dup2(fd0,2);
 
-
+        while(true){
+            pause();
+        }
 
     }
 
+    return EXIT_SUCCESS;
     
 }
