@@ -10,7 +10,7 @@
 #include<sys/stat.h>
 #include<fcntl.h>
 
-pid_t daemon;
+pid_t process_daemon;
 pid_t mole1;
 pid_t mole2;
 pid_t new_mole;
@@ -59,7 +59,7 @@ void sig_handler(sig){
         //see kill(2)
         kill(mole1, SIGKILL);
         kill(mole2, SIGKILL);
-        kill(daemon, SIGKILL);
+        kill(process_daemon, SIGKILL);
         
     }
     else if(sig == SIGUSR1){
